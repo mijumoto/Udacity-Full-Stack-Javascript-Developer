@@ -70,8 +70,9 @@ jobs:
           # TODO: Install, build, deploy in both apps
           command: |
             echo "# TODO: Install, build, deploy in both apps"
+            cd "Project 4/udagram/udagram-api/"
             echo $(eb list)
-            echo $(aws s3 list)
+            echo $(aws s3 ls)
             echo "aws s3 cp ./udagram/udagram-frontend/www s3://fullstack-udacity-321723638230/ --recursive"
             
 workflows:
