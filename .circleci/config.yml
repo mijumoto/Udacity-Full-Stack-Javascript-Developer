@@ -17,7 +17,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - build-{{ checksum "/home/circleci/Project 4/package.json" }}
+            - build-{{ checksum "/home/circleci/project/Project 4/package.json" }}
             - frontend-build-
       # Use root level package.json to install dependencies in the frontend app
       - run:
@@ -59,8 +59,8 @@ jobs:
             cd "Project 4"
             npm run api:build
       - save_cache:
-          paths: ["≈/udagram/udagram-api/node_modules", "Project 4/udagram/udagram-frontend/node_modules", "Project 4/udagram/udagram-api/www", "Project 4/udagram/udagram-frontend/www"]
-          key: build-{{ checksum "/home/circleci/Project 4/package.json" }}
+          paths: ["/udagram/udagram-api/node_modules", "Project 4/udagram/udagram-frontend/node_modules", "Project 4/udagram/udagram-api/www", "Project 4/udagram/udagram-frontend/www"]
+          key: build-{{ checksum "/home/circleci/project/Project 4/package.json" }}
   # deploy step will run only after manual approval
   deploy:
     docker:
@@ -84,12 +84,12 @@ jobs:
             cd "Project 4/udagram/udagram-api/"
             eb deploy
       - run:
-          name: Deploy App
+          name: Deploy FrontEnd App
           # TODO: Install, build, deploy in both apps
           command: |
             echo "# TODO: Install, build, deploy in both apps"
             cd "Project 4/udagram/udagram-frontend/"
-            aws s3 cp ./www s3://fullstack-udacity-321723638230/ --recursive"
+            aws s3 cp ./www s3://fullstack-udacity-321723638230/ --recursive
             
 workflows:
   udagram:
