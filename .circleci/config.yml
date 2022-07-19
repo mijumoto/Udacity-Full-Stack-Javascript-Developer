@@ -31,27 +31,26 @@ jobs:
             sed -i -e "s/myawsbucket-75139724085/$AWS_BUCKET_NAME/g" ./udagram/udagram-frontend/bin/deploy.sh
             sed -i -e "s/http:\/\/localhost:8080\/api\/v0/http:\/\/udagram-api-dev-dev.us-east-1.elasticbeanstalk.com\/api\/v0/g" ./udagram/udagram-frontend/src/environments/environment.ts
             sed -i -e "s/http:\/\/localhost:8080\/api\/v0/http:\/\/udagram-api-dev-dev.us-east-1.elasticbeanstalk.com\/api\/v0/g" ./udagram/udagram-frontend/src/environments/environment.prod.ts
-            npm run frontend:install
-      # TODO: Install dependencies in the the backend API          
+            npm run frontend:install      
       - run:
           name: Install API Dependencies
           command: |
            cd "Project 4"
            npm run api:install
-      # TODO: Lint the frontend
+
       - run:
           name: Front-End Lint
           command: |
             cd "Project 4"
             npm run frontend:lint
-      # TODO: Build the frontend app
+
       - run:
           name: Front-End Build
           command: |
             echo "TODO: Build the frontend app"
             cd "Project 4"
             npm run frontend:build
-      # TODO: Build the backend API      
+    
       - run:
           name: API Build
           command: |
@@ -65,7 +64,6 @@ jobs:
   deploy:
     docker:
       - image: "cimg/node:16.15"
-      # more setup needed for aws, node, elastic beanstalk
     steps:
       - node/install:
           node-version: '16.15' 
@@ -78,18 +76,16 @@ jobs:
             - build-
       - run:
           name: Deploy Backend Api
-          # TODO: Install, build, deploy in both apps
           command: |
             echo "# TODO: Install, build, deploy in both apps"
             cd "Project 4/udagram/udagram-api/"
             eb deploy
       - run:
           name: Deploy FrontEnd App
-          # TODO: Install, build, deploy in both apps
           command: |
             echo "# TODO: Install, build, deploy in both apps"
             cd "Project 4/udagram/udagram-frontend/"
-            aws s3 cp ./www s3://fullstack-udacity-321723638230/ --recursive
+            aws s3 cp ./www s3://fullstack-udacity-321723638230/ --recursive --acl public-read
             
 workflows:
   udagram:
