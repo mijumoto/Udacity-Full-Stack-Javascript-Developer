@@ -24,6 +24,9 @@ jobs:
             echo $(node --version)
             echo "NPM --version" 
             echo $(npm --version)
+            sed -i -e "s/myawsbucket-75139724085/$AWS_BUCKET_NAME/g" ./udagram/udagram-frontend/bin/deploy.sh
+            sed -i -e "s/http:\/\/localhost:8080\/api\/v0/http:\/\/udagram-api-dev-dev.us-east-1.elasticbeanstalk.com\/api\/v0/g" ./udagram/udagram-frontend/src/environments/environment.ts
+            sed -i -e "s/http:\/\/localhost:8080\/api\/v0/http:\/\/udagram-api-dev-dev.us-east-1.elasticbeanstalk.com\/api\/v0/g" ./udagram/udagram-frontend/src/environments/environment.prod.ts
             npm run frontend:install
       # TODO: Install dependencies in the the backend API          
       - run:
