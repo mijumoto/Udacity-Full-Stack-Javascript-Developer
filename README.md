@@ -14,6 +14,6 @@ http://fullstack-udacity-321723638230.s3-website-us-east-1.amazonaws.com/
 
 ## Screenshots
 
-![alt text](https://raw.githubusercontent.com/mijumoto/Udacity-Full-Stack-Javascript-Developer/main/Project%204/#Screenshots/working-app.png?sanitize=true)
+![alt text](https://raw.githubusercontent.com/mijumoto/Udacity-Full-Stack-Javascript-Developer/main/Project%204/%23Screenshots/working-app.png?sanitize=true)
 
 
