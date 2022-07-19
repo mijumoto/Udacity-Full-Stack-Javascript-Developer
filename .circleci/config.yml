@@ -9,11 +9,11 @@ jobs:
   build:
     docker:
       # the base image can run most needed actions with orbs
-      - image: "cimg/node:14.15"
+      - image: "cimg/node:16.15"
     steps:
       # install node and checkout code
       - node/install:
-          node-version: '14.15'         
+          node-version: '16.15'         
       - checkout
       # Use root level package.json to install dependencies in the frontend app
       - run:
@@ -57,11 +57,11 @@ jobs:
   # deploy step will run only after manual approval
   deploy:
     docker:
-      - image: "cimg/base:stable"
+      - image: "cimg/node:16.15"
       # more setup needed for aws, node, elastic beanstalk
     steps:
       - node/install:
-          node-version: '14.15' 
+          node-version: '16.15' 
       - eb/setup
       - aws-cli/setup
       - checkout
@@ -70,6 +70,9 @@ jobs:
           # TODO: Install, build, deploy in both apps
           command: |
             echo "# TODO: Install, build, deploy in both apps"
+            echo $(eb list)
+            echo $(aws s3 list)
+            echo "aws s3 cp ./udagram/udagram-frontend/www s3://fullstack-udacity-321723638230/ --recursive"
             
 workflows:
   udagram:
@@ -79,7 +82,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
           type: approval
           requires:
             - build
